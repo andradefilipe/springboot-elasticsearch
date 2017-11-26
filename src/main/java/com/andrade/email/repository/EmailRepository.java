@@ -12,4 +12,6 @@ public interface EmailRepository extends ElasticsearchRepository<Email, String> 
 
 	List<Email> findByText(String text);
 
+	List<Email> findBySender(String text);
+
 }

@@ -2,6 +2,9 @@ package com.andrade.email.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import com.andrade.email.model.Email;
 
 public interface EmailService {
@@ -15,5 +18,7 @@ public interface EmailService {
     Iterable<Email> findAll();
 
     List<Email> findByText(String title);
+
+    List<Email> findBySender(String title);
 
 }

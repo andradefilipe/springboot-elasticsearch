@@ -1,64 +1,70 @@
 package com.andrade.email.model;
 
-import org.jongo.marshall.jackson.oid.ObjectId;
-import org.springframework.data.annotation.Id;
+import java.util.List;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.elasticsearch.annotations.Document;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.gson.annotations.SerializedName;
+
 
 @Document(indexName = "andrade", type = "emails")
 public class Email {
 
-	@JsonProperty("_id")
-	@ObjectId
-    private String id;
+    @SerializedName("_id")
+	private String id;
 
-	@JsonProperty("sender")
+	@SerializedName("sender")
 	private String sender;
 
-	@JsonProperty("recipients")
-	private String recipients;
+	@SerializedName("recipients")
+	private  List<String> recipients;
 
-	@JsonProperty("cc")
-	private String cc;
+	@SerializedName("cc")
+	private List<String> cc;
 
-	@JsonProperty("text")
+	@SerializedName("text")
 	private String text;
 
-	@JsonProperty("mid")
+	@SerializedName("mid")
 	private String mid;
 
-	@JsonProperty("fpath")
+	@SerializedName("fpath")
 	private String fPath;
 
-	@JsonProperty("bcc")
-	private String bcc;
+	@SerializedName("bcc")
+	private List<String> bcc;
 
-	@JsonProperty("to")
-	private String to;
+	@SerializedName("to")
+	private List<String> to;
 
-	@JsonProperty("replyTo")
+	@SerializedName("replyto")
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private String replyTo;
 
-	@JsonProperty("ctype")
+	@SerializedName("ctype")
 	private String cType;
 
-	@JsonProperty("fName")
+	@SerializedName("fname")
 	private String fName;
-	
-	@JsonProperty("date")
+
+	@SerializedName("date")
 	private String date;
 
-	@JsonProperty("folder")
+	@SerializedName("folder")
 	private String folder;
 
-	@JsonProperty("subject")
+	@SerializedName("subject")
 	private String subject;
 
 	public Email() {
 	}
 
 	public String getId() {
+		if(id == null){
+			return id = new String();
+		}
 		return id;
 	}
 
@@ -74,19 +80,19 @@ public class Email {
 		this.sender = sender;
 	}
 
-	public String getRecipients() {
+	public  List<String> getRecipients() {
 		return recipients;
 	}
 
-	public void setRecipients(String recipients) {
+	public void setRecipients(List<String> recipients) {
 		this.recipients = recipients;
 	}
 
-	public String getCc() {
+	public List<String> getCc() {
 		return cc;
 	}
 
-	public void setCc(String cc) {
+	public void setCc(List<String> cc) {
 		this.cc = cc;
 	}
 
@@ -114,19 +120,19 @@ public class Email {
 		this.fPath = fPath;
 	}
 
-	public String getBcc() {
+	public List<String> getBcc() {
 		return bcc;
 	}
 
-	public void setBcc(String bcc) {
+	public void setBcc(List<String> bcc) {
 		this.bcc = bcc;
 	}
 
-	public String getTo() {
+	public List<String> getTo() {
 		return to;
 	}
 
-	public void setTo(String to) {
+	public void setTo(List<String> to) {
 		this.to = to;
 	}
 
@@ -180,7 +186,7 @@ public class Email {
 
 
 
-	public Email(String id, String sender, String recipients, String cc, String text, String to, String date,
+	public Email(String id, String sender, List<String> recipients, List<String> cc, String text, List<String> to, String date,
 			String subject) {
 		this.id = id;
 		this.sender = sender;

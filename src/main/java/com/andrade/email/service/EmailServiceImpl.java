@@ -40,4 +40,10 @@ public class EmailServiceImpl implements EmailService {
 		return emailRepository.findByText(text);
 	}
 
+	@Override
+	public List<Email> findBySender(String text) {
+		return emailRepository.findBySender(text);
+
+	}
+
 }
